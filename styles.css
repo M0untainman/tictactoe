@@ -13,7 +13,10 @@
     grid-gap: 10px;
 }
 
-.block{
+.blocks{
     background-color: grey;
-    
+    text-align: center;
+    justify-content: center;
+    font-size: 5rem;
+
 }
