@@ -1,0 +1,21 @@
+things to make from start
+    store gameboard in an array
+    players should be stored in objects too
+    object to manage the flow of the game
+
+goal is to have minimal global code
+
+steps
+    1 have the gameboard render
+    2 build the folowing 
+        players to add tokens to the board for legal moves this must be tied to the DOM
+        to check if the game has been won or if there is a draw
+        playes must be able to enter their name
+        button to start or restart the game
+        congratulate the player somehow
+
+optional
+    create an ai
+
+        
+
