@@ -25,8 +25,14 @@ const gameboard = (() => {
     }
     const takeTurn = (e) => {
         let chosenBlock = e.srcElement.id;
-        gameGridArray[chosenBlock] = switchPlayer();
-        placeTokens(gameGridArray);
+        if (gameGridArray[chosenBlock] == null){
+            gameGridArray[chosenBlock] = switchPlayer();
+            placeTokens(gameGridArray);
+        }
+        else{
+            alert('Not a legal move')
+        }
+        
     }
     renderGrid();
 
