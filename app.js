@@ -8,17 +8,13 @@ const gameboard = (() => {
         for (let i = 0; i < 9 ; i++){
             let block = document.createElement('div')
             block.className = ('blocks')
-            block.addEventListener('click', (e, gameGridArray) => {takeTurn(e)})
+            block.addEventListener('click', (e) => {takeTurn(e)})
             let blockNum = i
             block.id = blockNum;
             gameGrid.appendChild(block);
         }
         gameArea.appendChild(gameGrid);
     }
-
-    renderGrid();
-
-    
     const placeTokens = (gridArray) => {
         for (let i = 0; i < 9; i++){
             let position = document.getElementById(i);
@@ -29,13 +25,32 @@ const gameboard = (() => {
     }
     const takeTurn = (e) => {
         let chosenBlock = e.srcElement.id;
-        gameGridArray[chosenBlock] = 'x';
+        gameGridArray[chosenBlock] = activePlayer.token;
         placeTokens(gameGridArray);
     }
-
-    return{
-        takeTurn
-    }
+    renderGrid();
 
 })();
+
+//const gameControl = (() => {
+    // dom declarations for player info
+    const player1token = document.getElementById('token1').value;
+    const player1name = document.getElementById('name1').value;
+    const player2token = document.getElementById('token2').value
+    const player2name = document.getElementById('name2').value;
+
+    const playerFactory = (name, token) => {
+        return {name, token}
+    }
+
+    const player1 = playerFactory(player1name, player1token);
+    const player2 = playerFactory(player2name, player2token);
+    
+    let activePlayer = player2;
+
+    
+    
+//})();
+
+ 
 
