@@ -25,14 +25,14 @@ const gameboard = (() => {
     }
     const takeTurn = (e) => {
         let chosenBlock = e.srcElement.id;
-        gameGridArray[chosenBlock] = activePlayer.token;
+        gameGridArray[chosenBlock] = switchPlayer();
         placeTokens(gameGridArray);
     }
     renderGrid();
 
 })();
 
-//const gameControl = (() => {
+// const gameControl = (() => {
     // dom declarations for player info
     const player1token = document.getElementById('token1').value;
     const player1name = document.getElementById('name1').value;
@@ -46,11 +46,22 @@ const gameboard = (() => {
     const player1 = playerFactory(player1name, player1token);
     const player2 = playerFactory(player2name, player2token);
     
-    let activePlayer = player2;
+    let activePlayer = player1;
+    const switchPlayer = () => {
+        
+        if (activePlayer == player1) {
+            activePlayer = player2;
+            return player1.token;
+        }
+        else if (activePlayer == player2) {
+            activePlayer = player1;
+            return player2.token;
+        }
+        
+    };
 
     
-    
-//})();
+// })();
 
  
 
