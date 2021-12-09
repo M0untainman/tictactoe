@@ -1,6 +1,6 @@
 const gameboard = (() => {
     // create the game grid area
-    const gameGridArray = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x']
+    const gameGridArray = []
     const renderGrid = () => {
         const gameArea = document.querySelector('.gameArea');
         let gameGrid = document.createElement('div');
@@ -8,22 +8,34 @@ const gameboard = (() => {
         for (let i = 0; i < 9 ; i++){
             let block = document.createElement('div')
             block.className = ('blocks')
-            let blockNum = `block${i}`
-            block.classList.add(blockNum)
+            block.addEventListener('click', (e, gameGridArray) => {takeTurn(e)})
+            let blockNum = i
+            block.id = blockNum;
             gameGrid.appendChild(block);
         }
         gameArea.appendChild(gameGrid);
     }
-    
+
     renderGrid();
 
+    
     const placeTokens = (gridArray) => {
         for (let i = 0; i < 9; i++){
-            let position = document.querySelector(`.block${i}`);
-            position.innerHTML = gridArray[i];
+            let position = document.getElementById(i);
+            if (gridArray[i] != null){
+                position.innerHTML = gridArray[i];
+            }
         }
     }
-    placeTokens(gameGridArray);
+    const takeTurn = (e) => {
+        let chosenBlock = e.srcElement.id;
+        gameGridArray[chosenBlock] = 'x';
+        placeTokens(gameGridArray);
+    }
+
+    return{
+        takeTurn
+    }
 
 })();
 
