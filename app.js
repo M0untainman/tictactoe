@@ -48,11 +48,24 @@ const gameControl = (() => {
        })  
     }
 
+    const takeTurn = (e) => {
+        let chosenBlock = e.srcElement.id;
+        if (gameboard.gameGridArray[chosenBlock] == null){
+            gameboard.gameGridArray[chosenBlock] = switchPlayer();
+            checkWin(gameboard.gameGridArray);
+            gameboard.placeTokens(gameboard.gameGridArray);
+            
+        }
+        else{
+            alert('Not a legal move')
+        }  
+    }
+
     return{
         switchPlayer,
         checkWin,
-        activePlayer
-
+        activePlayer,
+        takeTurn
     }
  })();
 
@@ -70,7 +83,7 @@ const gameboard = (() => {
             let block = document.createElement('div')
             block.className = ('blocks')
             block.addEventListener('click', (e) => {
-                takeTurn(e);
+                gameControl.takeTurn(e);
             })
             let blockNum = i
             block.id = blockNum;
@@ -86,21 +99,11 @@ const gameboard = (() => {
             }
         }
     }
-    const takeTurn = (e) => {
-        let chosenBlock = e.srcElement.id;
-        if (gameGridArray[chosenBlock] == null){
-            gameGridArray[chosenBlock] = gameControl.switchPlayer();
-            gameControl.checkWin(gameGridArray);
-            placeTokens(gameGridArray);
-            
-        }
-        else{
-            alert('Not a legal move')
-        }  
-    }
+    
     renderGrid();
     return{
-        gameGridArray
+        gameGridArray,
+        placeTokens
     }
 })();
 
