@@ -40,8 +40,8 @@ const gameboard = (() => {
             }
         }
     }
-    
-        
+
+
 
         let player1 = playerFactory(player1name, player1token);
         let player2 = playerFactory(player2name, player2token);
@@ -59,16 +59,17 @@ const gameboard = (() => {
         gameboard.player1.name = player1name;
         gameboard.player2.token = player2token;
         gameboard.player2.name = player2name;
-        gameControl.activePlayer = gameboard.player2;
+        gameControl.setActivePlayer(gameboard.player2);
+        // gameControl.activePlayer = gameboard.player2;
     }
-    
+
     return{
         gameGridArray,
         placeTokens,
         player1,
         player2
-        
-        
+
+
     }
 })();
 
@@ -78,21 +79,25 @@ const gameControl = (() => {
     let gameInfo = document.getElementById('gameInfo');
     // logic to control which players move it is
     let activePlayer = gameboard.player2;
-    
+
     const switchPlayer = () => {
         if (activePlayer === gameboard.player1) {
             gameInfo.innerHTML = 'player1 turn'
             activePlayer = gameboard.player2;
-            //console.log(activePlayer);
+            console.log(activePlayer);
         }
         else if (activePlayer === gameboard.player2) {
             activePlayer = gameboard.player1;
             gameInfo.innerHTML = 'player2 turn'
-            //console.log(activePlayer);
+            console.log(activePlayer);
         }
         return activePlayer.token
-        
+
     };
+
+    const setActivePlayer = (newActivePlayer) => {
+        activePlayer = newActivePlayer;
+    }
 
     // logic to find winner
     const winConditions = [
@@ -115,20 +120,20 @@ const gameControl = (() => {
                 stopGame()
                 gameOver = true;
             }
-           if (gameOver == false) {
-                let empty = 0; 
-            gameboard.gameGridArray.forEach((grid) => {  
-                 if (grid != ''){
+           if (gameOver === false) {
+                let empty = 0;
+            gameboard.gameGridArray.forEach((grid) => {
+                 if (grid !== ''){
                      empty += 1;
                  }
-                 if (empty == 9){
+                 if (empty === 9){
                      stopGame()
                      gameInfo.innerHTML= 'game is draw';
                  }
             })
            }
-        }) 
-       
+        })
+
     }
 
     const stopGame = () =>{
@@ -148,16 +153,17 @@ const gameControl = (() => {
         }
         else{
             alert('Not a legal move')
-        }  
+        }
     }
 
-    
+
 
 
     return{
         switchPlayer,
         checkWin,
         activePlayer,
+        setActivePlayer,
         takeTurn
     }
  })();
