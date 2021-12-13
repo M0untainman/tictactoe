@@ -73,10 +73,6 @@ const gameboard = (() => {
 // game control object
 const gameControl = (() => {
     
-    
-
-    
-    
     // logic to control which players move it is
     let activePlayer = gameboard.player2;
     
