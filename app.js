@@ -79,11 +79,11 @@ const gameControl = (() => {
     const switchPlayer = () => {
         if (activePlayer === gameboard.player1) {
             activePlayer = gameboard.player2;
-            console.log(activePlayer);
+            //console.log(activePlayer);
         }
         else if (activePlayer === gameboard.player2) {
             activePlayer = gameboard.player1;
-            console.log(activePlayer);
+            //console.log(activePlayer);
         }
         return activePlayer.token
         
@@ -105,8 +105,17 @@ const gameControl = (() => {
        winConditions.forEach((item) =>{
            if (gameboard.gameGridArray[item[0]] === activePlayer.token && gameboard.gameGridArray[item[1]] === activePlayer.token && gameboard.gameGridArray[item[2]] === activePlayer.token){
                console.log(`${activePlayer.name} wins`)
+               stopGame()
            }
        })  
+    }
+
+    const stopGame = () =>{
+        for (let i = 0 ; i < 9; i++){
+            let block = document.getElementById(`${i}`)
+            block.style.backgroundColor = 'yellow'
+            block.style.pointerEvents = 'none';
+            };
     }
 
     const takeTurn = (e) => {
