@@ -47,6 +47,8 @@ const gameboard = (() => {
         let player2 = playerFactory(player2name, player2token);
 
     const startGame = () =>{
+        gameStartBtn.value = 'Restart game'
+        document.getElementById('gameInfo').innerHTML = 'Player 1 turn'
         _renderGrid();
         gameboard.gameGridArray = ['', '', '', '', '', '', '', '', '', ]
         player1token = document.getElementById('token1').value;
@@ -72,17 +74,20 @@ const gameboard = (() => {
 
 // game control object
 const gameControl = (() => {
-    
+    // DOM declarations
+    let gameInfo = document.getElementById('gameInfo');
     // logic to control which players move it is
     let activePlayer = gameboard.player2;
     
     const switchPlayer = () => {
         if (activePlayer === gameboard.player1) {
+            gameInfo.innerHTML = 'player1 turn'
             activePlayer = gameboard.player2;
             //console.log(activePlayer);
         }
         else if (activePlayer === gameboard.player2) {
             activePlayer = gameboard.player1;
+            gameInfo.innerHTML = 'player2 turn'
             //console.log(activePlayer);
         }
         return activePlayer.token
@@ -102,12 +107,28 @@ const gameControl = (() => {
     ];
 
     const checkWin = () => {
-       winConditions.forEach((item) =>{
-           if (gameboard.gameGridArray[item[0]] === activePlayer.token && gameboard.gameGridArray[item[1]] === activePlayer.token && gameboard.gameGridArray[item[2]] === activePlayer.token){
-               console.log(`${activePlayer.name} wins`)
-               stopGame()
+        let gameOver = false;
+        winConditions.forEach((item) =>{
+            if (gameboard.gameGridArray[item[0]] === activePlayer.token && gameboard.gameGridArray[item[1]] === activePlayer.token && gameboard.gameGridArray[item[2]] === activePlayer.token){
+                console.log(`${activePlayer.name} wins`)
+                gameInfo.innerHTML= `${activePlayer.name} wins`;
+                stopGame()
+                gameOver = true;
+            }
+           if (gameOver == false) {
+                let empty = 0; 
+            gameboard.gameGridArray.forEach((grid) => {  
+                 if (grid != ''){
+                     empty += 1;
+                 }
+                 if (empty == 9){
+                     stopGame()
+                     gameInfo.innerHTML= 'game is draw';
+                 }
+            })
            }
-       })  
+        }) 
+       
     }
 
     const stopGame = () =>{
@@ -124,7 +145,6 @@ const gameControl = (() => {
             gameboard.gameGridArray[chosenBlock] = switchPlayer();
             checkWin(gameboard.gameGridArray);
             gameboard.placeTokens(gameboard.gameGridArray);
-            
         }
         else{
             alert('Not a legal move')
