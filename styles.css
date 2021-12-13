@@ -1,7 +1,6 @@
-.gameArea{
-    width: 700px;
-    height: 700px;
-    background-color: chartreuse;
+body{
+    background-color: #FFE6BC;
+    display: flex;
 }
 #game_grid{
     display: grid;
@@ -11,14 +10,33 @@
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto auto;
     grid-gap: 10px;
+    margin: auto;
 }
 
 .blocks{
-    background-color: grey;
+    background-color: #E4CDA7;
     text-align: center;
     justify-content: center;
     font-size: 3rem;
     height: 10rem;
     width: 10rem;
 
+}
+
+#playerinfo{
+    display: flex;
+    justify-content: left;
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    background-color: #8E806A;
+    border-radius: 5%;
+    width: 40rem;
+}
+
+.playerinfo-container{
+    margin: 2rem;
+}
+#gameStartBtn{
+    align-self: center;
 }

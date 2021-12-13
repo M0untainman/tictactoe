@@ -7,17 +7,33 @@
     <title>TIC TAC TOE</title>
 </head>
 <body>
+    <div class='gameArea'>   </div>
+    
     <div id='playerinfo'>
-        <label for="player1">player1:</label>
-        <input type="text" name="player1" placeholder='Name' id="name1">
-        <input type="text" name="p1token" placeholder='Token' id="token1">
-        <label for="player2">player2:</label>
-        <input type="text" name="player2" placeholder='Name' id="name2">
-        <input type="text" name="p2token" placeholder='Token'id="token2">
         
+        <div>
+            <div class="playerinfo-container">
+                <label for="player1">player1:</label>
+                <input type="text" name="player1" placeholder='Name' id="name1">
+            </div>
+            <div class="playerinfo-container">
+                <label for="p1token">Token:</label>
+                <input type="text" name="p1token" placeholder='Token' id="token1">
+            </div>
+        </div>
+        <div>
+            <div class="playerinfo-container">
+                <label for="player2">player2:</label>
+                <input type="text" name="player2" placeholder='Name' id="name2">
+            </div>
+            <div class="playerinfo-container">
+                <label for="p2token">Token:</label>
+                <input type="text" name="p2token" placeholder='Token'id="token2">
+            </div>    
+        </div>
+        <input type="button" value="Start game" id='gameStartBtn'>
     </div>
-    <div class='gameArea'>
-    </div>
+        
     <script src="app.js"></script>
 </body>
 </html>
